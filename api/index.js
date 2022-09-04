@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const cardRoute = require("./routes/card");
 const personRoute = require("./routes/person");
 const multer = require("multer");
 const path = require("path");
@@ -32,7 +31,6 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
-app.use("/card", cardRoute);
 app.use("/person", personRoute);
 
 app.listen(8080, () => {
@@ -53,9 +51,17 @@ app.post("/upload", upload.single("file"), (req, res) => {
 app.post("/getToken", async (req, res) => {
   try {
     const user = { name: req.body.username };
-
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    res.status(200).json({ accessToken: accessToken });
+    if (
+      req.body.username == process.env.NAME &&
+      req.body.password == process.env.PASS
+    ) {
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "2h",
+      });
+      res.status(200).json({ accessToken: accessToken });
+    } else {
+      res.status(403).send("Username or password not correct!");
+    }
   } catch (error) {
     console.log(error);
   }

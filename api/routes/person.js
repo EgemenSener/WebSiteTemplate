@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Person = require("../models/Person");
 const jwt = require("jsonwebtoken");
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateToken, async (req, res) => {
   try {
     const personInfo = new Person({
       title: req.body.title,
@@ -28,13 +28,13 @@ router.post("/", async (req, res) => {
 
 router.get("/", authenticateToken, async (req, res) => {
   try {
-    res.status(200).json(await Person.findOne());
+    res.status(200).json(await Person.findById(req.body._id));
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateToken, async (req, res) => {
   try {
     await Person.findByIdAndUpdate(req.params.id, {
       $set: req.body,
@@ -45,6 +45,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//Authentication
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
