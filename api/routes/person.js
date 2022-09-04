@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Person = require("../models/Person");
+const jwt = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
   try {
@@ -25,10 +26,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", authenticateToken, async (req, res) => {
   try {
-    const infos = await Person.findOne();
-    res.status(200).json(infos);
+    res.status(200).json(await Person.findOne());
   } catch (error) {
     res.status(500).json(error);
   }
@@ -44,5 +44,18 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (token == null) return res.status(403).send("Token is null");
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.status(403).send("Token is not correct!");
+    req.user = user;
+    next();
+  });
+}
 
 module.exports = router;
