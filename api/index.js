@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const userRoute = require("./routes/about");
+const cardRoute = require("./routes/card");
+const personRoute = require("./routes/person");
+const multer = require("multer");
+const path = require("path");
 
 dotenv.config();
 
@@ -12,12 +15,33 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
   console.log("Connected to MongoDB");
 });
 
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 //middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
-app.use("/about", userRoute);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/upload", upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("File uploaded succesfully.");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.use("/card", cardRoute);
+app.use("/person", personRoute);
 
 app.listen(8080, () => {
   console.log("Backend server is running!");
