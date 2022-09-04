@@ -18,8 +18,28 @@ router.post("/", async (req, res) => {
       certificates: req.body.certificates,
       experience: req.body.experience,
     });
-    const infos = await personInfo.save();
+    await personInfo.save();
+    res.status(200).send("Ok!");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const infos = await Person.findOne();
     res.status(200).json(infos);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    await Person.findByIdAndUpdate(req.params.id, {
+      $set: req.body,
+    });
+    res.status(200).send("Succesfully updated!");
   } catch (error) {
     res.status(500).json(error);
   }
