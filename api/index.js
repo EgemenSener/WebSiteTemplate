@@ -32,7 +32,8 @@ app.use(helmet());
 app.use(morgan("common"));
 
 app.use("/person", personRoute);
-app.listen(8080, () => {
+
+app.listen(process.env.PORT || 5000, () => {
   console.log("Backend server is running!");
 });
 
