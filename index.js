@@ -5,9 +5,9 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const personRoute = require("./routes/person");
+const authenticationRoute = require("./routes/authentication");
 const multer = require("multer");
 const path = require("path");
-const jwt = require("jsonwebtoken");
 
 dotenv.config();
 
@@ -34,6 +34,7 @@ app.use(helmet());
 app.use(morgan("common"));
 
 app.use("/person", personRoute);
+app.use("/auth", authenticationRoute);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Backend server is running!");
@@ -46,25 +47,5 @@ app.post("/upload", upload.single("file"), (req, res) => {
     return res.status(200).json("File uploaded succesfully.");
   } catch (err) {
     console.log(err);
-  }
-});
-
-//Get Token
-app.post("/getToken", async (req, res) => {
-  try {
-    const user = { name: req.body.username };
-    if (
-      req.body.username == process.env.NAME &&
-      req.body.password == process.env.PASS
-    ) {
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "2h",
-      });
-      res.status(200).json({ accessToken: accessToken });
-    } else {
-      res.status(403).send("Username or password not correct!");
-    }
-  } catch (error) {
-    console.log(error);
   }
 });
