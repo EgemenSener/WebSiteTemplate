@@ -15,7 +15,9 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
   console.log("Connected to MongoDB");
 });
 
+//Using for reach files from url
 app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use("/documents", express.static(path.join(__dirname, "public/documents")));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
