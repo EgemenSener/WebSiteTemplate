@@ -49,7 +49,7 @@ const PersonSchema = new mongoose.Schema(
       type: Array,
     },
 
-    education: { Card },
+    education: Card,
 
     experience: [Card],
 
