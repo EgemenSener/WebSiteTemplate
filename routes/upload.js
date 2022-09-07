@@ -12,17 +12,12 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-router.post(
-  "/upload/:id",
-  middlewares.authenticateToken,
-  upload.single("file"),
-  (req, res) => {
-    try {
-      return res.status(200).json("File uploaded succesfully.");
-    } catch (err) {
-      console.log(err);
-    }
+router.post("/upload/:id", middlewares.authenticateToken, upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("File uploaded succesfully.");
+  } catch (err) {
+    console.log(err);
   }
-);
+});
 
 module.exports = router;
