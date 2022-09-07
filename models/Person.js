@@ -27,10 +27,15 @@ const PersonSchema = new mongoose.Schema(
       type: String,
     },
 
+    cvFile: {
+      type: String,
+    },
+
     city: {
       type: String,
       max: 50,
     },
+
     from: {
       type: String,
       max: 50,
