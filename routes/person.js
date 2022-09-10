@@ -26,9 +26,9 @@ router.post("/", middlewares.authenticateToken, async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/:_id", async (req, res) => {
   try {
-    res.status(200).json(await Person.findById(req.body._id));
+    res.status(200).json(await Person.findById(req.params._id));
   } catch (error) {
     res.status(500).json(error);
   }
