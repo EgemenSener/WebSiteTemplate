@@ -15,15 +15,24 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
   console.log("Connected to MongoDB");
 });
 
+//Template Engine
+app.set("view engine", "ejs");
+
 //Using for reach files from url
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/documents", express.static(path.join(__dirname, "public/documents")));
+
+// for index's css and js files
+app.use(express.static("views"));
 
 //middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
+app.get("/", (req, res) => {
+  res.status(200).render("index");
+});
 app.use("/person", personRoute);
 app.use("/", tokenRoute);
 app.use("/", uploadRoute);
