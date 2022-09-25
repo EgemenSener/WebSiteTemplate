@@ -8,6 +8,7 @@ const personRoute = require("./routes/person");
 const tokenRoute = require("./routes/token");
 const uploadRoute = require("./routes/upload");
 const path = require("path");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(express.static("views"));
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).render("index");
