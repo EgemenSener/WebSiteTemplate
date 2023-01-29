@@ -10,11 +10,23 @@ const CardSchema = new mongoose.Schema(
       type: String,
     },
 
-    time: {
+    title3: {
+      type: String,
+    },
+
+    endDate: {
+      type: String,
+    },
+
+    startDate: {
       type: String,
     },
 
     description: {
+      type: String,
+    },
+
+    country: {
       type: String,
     },
 

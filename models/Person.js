@@ -46,7 +46,11 @@ const PersonSchema = new mongoose.Schema(
       default: [],
     },
 
-    description: {
+    personalInfo: {
+      type: String,
+    },
+
+    personalInfo2: {
       type: String,
     },
 
@@ -54,7 +58,7 @@ const PersonSchema = new mongoose.Schema(
       type: Array,
     },
 
-    education: Card,
+    education: [Card],
 
     experience: [Card],
 
