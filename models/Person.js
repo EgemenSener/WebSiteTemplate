@@ -54,9 +54,9 @@ const PersonSchema = new mongoose.Schema(
       type: String,
     },
 
-    skills: {
-      type: Array,
-    },
+    field: [{}],
+
+    skills: [{}],
 
     education: [Card],
 
