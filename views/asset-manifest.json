@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c81a6e60.css",
+    "main.js": "/static/js/main.4c774e8c.js",
+    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
+    "static/media/about-img.jpg": "/static/media/about-img.ebd147aa4ebef7c1e229.jpg",
+    "static/media/home-img.png": "/static/media/home-img.139063c3954010ae74fa.png",
+    "static/media/certificates-img.jpg": "/static/media/certificates-img.061f8b7871d4a7eae315.jpg",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/education-img.jpg": "/static/media/education-img.233af5e8b254bcf759fe.jpg",
+    "static/media/experience-img.jpg": "/static/media/experience-img.aa4fb77650b6e8c34aa5.jpg",
+    "static/media/quotes-bg.jpg": "/static/media/quotes-bg.d6d9db269908b7b97d07.jpg",
+    "static/media/contact-img.jpg": "/static/media/contact-img.2cb6654783262af48565.jpg",
+    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/index.html",
+    "main.c81a6e60.css.map": "/static/css/main.c81a6e60.css.map",
+    "main.4c774e8c.js.map": "/static/js/main.4c774e8c.js.map",
+    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c81a6e60.css",
+    "static/js/main.4c774e8c.js"
+  ]
+}
